@@ -17,7 +17,7 @@ def application(env, start_response):
   html = template.render(
     {
       'title': 'Servidor en Python',
-      'name': 'Alberto Ortiz'
+      'name': 'Cody'
     }
   )
 
