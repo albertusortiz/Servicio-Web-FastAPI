@@ -71,7 +71,8 @@ print(
 
 
 """ 
-Anotaciones en Colecciones
+Anotaciones en Colecciones de tipo Lista
+"""
 """
 from typing import List
 
@@ -84,3 +85,30 @@ def promedio(calificaciones: List[int]) -> float:
 print(
   promedio(calificaciones)
 )
+"""
+
+
+""" 
+Anotaciones en Colecciones de tipo Tupla
+"""
+"""
+from typing import Tuple
+from typing import Union
+
+# configuraciones: Tuple[str] = ('localhost', '3306', 'root')
+configuraciones: Tuple[Union[str, str, bool, int]] = ('root', 'localhost', 3306, True)
+
+print(configuraciones)
+"""
+
+""" 
+Anotaciones en Colecciones de tipo Diccionario
+"""
+from typing import Dict
+
+usuarios: Dict[str, int] = {
+  'eduardo': 10,
+  'cody': 20
+}
+
+print(usuarios)
