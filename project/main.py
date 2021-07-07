@@ -33,7 +33,7 @@ async def index():
 @app.post('/users')
 async def create_user(user: UserBaseModel):
 
-    if User.select().where(User.username == user.username).exists():
+    if User.select().where(User.username == user.username).first():
         return HTTPException(409, 'El username ya se encuentra en uso.')
 
     hash_password = User.create_password(user.password)
@@ -43,4 +43,7 @@ async def create_user(user: UserBaseModel):
         password = hash_password
     )
 
-    return user.id
+    return {
+        'id': user.id,
+        'username': user.username
+    }
