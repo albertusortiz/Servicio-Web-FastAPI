@@ -36,3 +36,20 @@ class UserResponseModel(BaseModel):
     class Config:
         orm_mode = True
         getter_dict = PeweeGetterDict
+
+
+class ReviewRequestModel(BaseModel):
+    user_id: int
+    movie_id: int
+    review: str
+    score: int
+
+class ReviewResponseModel(BaseModel):
+    id: int
+    movie_id: int
+    review: str
+    score: int
+
+    class Config:
+        orm_mode = True
+        getter_dict = PeweeGetterDict

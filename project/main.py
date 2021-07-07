@@ -10,6 +10,9 @@ from database import database as connection
 from schemas import UserRequestModel
 from schemas import UserResponseModel
 
+from schemas import ReviewRequestModel
+from schemas import ReviewResponseModel
+
 app = FastAPI(title='Proyecto para reseñar peliculas',
             description='En este proyecto seremos capaces de reseñar peliculas.',
             version='1')
@@ -45,3 +48,16 @@ async def create_user(user: UserRequestModel):
     )
 
     return user
+
+
+@app.post('/reviews', response_model=ReviewResponseModel)
+async def create_reviews(user_review: ReviewRequestModel):
+    
+    user_review = UserReview.create(
+        user_id = user_review.user_id,
+        movie_id = user_review.movie_id,
+        review = user_review.review,
+        score = user_review.score
+    )
+
+    return user_review
