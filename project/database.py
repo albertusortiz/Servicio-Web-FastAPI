@@ -1,4 +1,3 @@
-from collections import defaultdict
 from peewee import *
 from datetime import datetime
 
@@ -30,9 +29,19 @@ class Movie(Model):
         return self.title
 
     class Meta:
-        database=database
+        database = database
         table_name = 'movies'
 
-class UserReviuew(Model):
+class UserReview(Model):
     user = ForeignKeyField(User, backref='reviews')
-    movie = ForeignKeyField(Movie, backref)
+    movie = ForeignKeyField(Movie, backref='reviews')
+    review = TextField()
+    score = IntegerField()
+    created_at = DateTimeField(default=datetime.now)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.movie.title}'
+
+    class Meta:
+        database = database
+        table_name = 'user_reviews'
