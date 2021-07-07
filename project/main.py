@@ -6,6 +6,8 @@ from database import UserReview
 
 from database import database as connection
 
+from schemas import UserBaseModel
+
 app = FastAPI(title='Proyecto para reseñar peliculas',
             description='En este proyecto seremos capaces de reseñar peliculas.',
             version='1')
@@ -26,3 +28,13 @@ def shutdown():
 async def index():
     return 'Hola mundo, desde un servidor en FastAPI.'
 
+
+@app.post('/users/')
+async def create_user(user: UserBaseModel):
+    
+    user = User.create(
+        username = user.username,
+        password = user.password
+    )
+
+    return user.id
