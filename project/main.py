@@ -35,7 +35,7 @@ async def index():
 async def create_user(user: UserRequestModel):
 
     if User.select().where(User.username == user.username).first():
-        return HTTPException(409, 'El username ya se encuentra en uso.')
+        raise HTTPException(status_code=409, detail='El username ya se encuentra en uso.')
 
     hash_password = User.create_password(user.password)
     
@@ -44,4 +44,4 @@ async def create_user(user: UserRequestModel):
         password = hash_password
     )
 
-    return UserResponseModel(id=user.id, username=user.username)
+    return user
