@@ -16,6 +16,14 @@ class PeweeGetterDict(GetterDict):
 
         return res
 
+class ResponseModel(BaseModel):
+    
+    class Config:
+        orm_mode = True
+        getter_dict = PeweeGetterDict
+
+# ----------- User -----------
+
 # Modelo para validar datos de entrada
 class UserRequestModel(BaseModel):
     username: str
@@ -29,14 +37,11 @@ class UserRequestModel(BaseModel):
         return username
 
 # Modelo para validar datos de salida
-class UserResponseModel(BaseModel):
+class UserResponseModel(ResponseModel):
     id: int
     username: str
 
-    class Config:
-        orm_mode = True
-        getter_dict = PeweeGetterDict
-
+# ----------- Review -----------
 
 class ReviewRequestModel(BaseModel):
     user_id: int
@@ -44,12 +49,8 @@ class ReviewRequestModel(BaseModel):
     review: str
     score: int
 
-class ReviewResponseModel(BaseModel):
+class ReviewResponseModel(ResponseModel):
     id: int
     movie_id: int
     review: str
     score: int
-
-    class Config:
-        orm_mode = True
-        getter_dict = PeweeGetterDict

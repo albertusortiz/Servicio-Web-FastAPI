@@ -51,7 +51,7 @@ async def create_user(user: UserRequestModel):
 
 
 @app.post('/reviews', response_model=ReviewResponseModel)
-async def create_reviews(user_review: ReviewRequestModel):
+async def create_review(user_review: ReviewRequestModel):
     
     user_review = UserReview.create(
         user_id = user_review.user_id,
