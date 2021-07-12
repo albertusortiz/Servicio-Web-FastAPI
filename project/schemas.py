@@ -41,6 +41,13 @@ class UserResponseModel(ResponseModel):
     id: int
     username: str
 
+# ----------- Movie -----------
+
+class MovieResponseModel(ResponseModel):
+    id: int
+    title: str
+
+
 # ----------- Review -----------
 
 class ReviewValidator():
@@ -62,7 +69,7 @@ class ReviewRequestModel(BaseModel, ReviewValidator):
 
 class ReviewResponseModel(ResponseModel):
     id: int
-    movie_id: int
+    movie: MovieResponseModel
     review: str
     score: int
 
