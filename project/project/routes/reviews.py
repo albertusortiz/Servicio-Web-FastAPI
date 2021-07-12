@@ -12,7 +12,7 @@ from ..schemas import ReviewRequestModel
 from ..schemas import ReviewRequestPutModel
 
 
-router = APIRouter(prefix='/api/v1/reviews')
+router = APIRouter(prefix='/reviews')
 
 
 @router.post('', response_model=ReviewResponseModel)
