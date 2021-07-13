@@ -2,7 +2,7 @@ import requests
 from requests.api import head
 
 URL = 'http://127.0.0.1:8000/api/v1/reviews'
-HEADERS = { 'accept': 'text/html' }
+HEADERS = { 'accept': 'application/json' }
 
 response = requests.get(URL, headers=HEADERS)
 
