@@ -1,4 +1,8 @@
+from typing import List
+
+from fastapi import Cookie
 from fastapi import Response
+
 from fastapi import APIRouter
 from fastapi import HTTPException
 
@@ -8,6 +12,8 @@ from ..database import User
 
 from ..schemas import UserRequestModel
 from ..schemas import UserResponseModel
+
+from ..schemas import ReviewResponseModel
 
 router = APIRouter(prefix='/users')
 
@@ -38,5 +44,16 @@ async def login(credentials: HTTPBasicCredentials, response: Response):
     if user.password != User.create_password(credentials.password):
         raise HTTPException(status_code=404, detail='Password Error.')
 
-    response.set_cookie(key='user_id', value=user.id)
+    response.set_cookie(key='user_id', value=user.id) # TOKEN
     return user
+
+
+@router.get('/reviews', response_model=List[ReviewResponseModel])
+async def get_reviews(user_id: int = Cookie(None)):
+    
+    user = User.select().where(User.id == user_id).first()
+
+    if user is None:
+        raise HTTPException(status_code=404, detail='User Not Found.')
+
+    return [ user_review for user_review in user.reviews ]
